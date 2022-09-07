@@ -5,28 +5,26 @@
     var temp = 1;
     var tempNextMonth = 1;
 }
-
-
-<div height="100%">
-    <div class="test">
-        <div class="test2"> Poniedziałek </div>
-        <div class="test2"> Wtorek </div>
-        <div class="test2"> Środa </div>
-        <div class="test2"> Czwartek </div>
-        <div class="test2"> Piątek </div>
-        <div class="test2"> Sobota </div>
-        <div class="test2"> Niedziela </div>
+<div class="test">
+    <div class="day-of-week-row">
+        <div class="day-of-week rounded"> Poniedziałek </div>
+        <div class="day-of-week rounded"> Wtorek </div>
+        <div class="day-of-week rounded"> Środa </div>
+        <div class="day-of-week rounded"> Czwartek </div>
+        <div class="day-of-week rounded"> Piątek </div>
+        <div class="day-of-week rounded"> Sobota </div>
+        <div class="day-of-week rounded"> Niedziela </div>
     </div>
     
 
     @for (int i = 0; i < 5; i++){
 
-    <div class="test">
+        <div class="day-row">
         @for (int j = 0; j<7; j++){
 
 
             if (firstDayNum != 0){
-                <div class="test2"> 
+                <div class="day rounded border border-5"> 
 
                     <p>@((int)ViewData["PrevMonthNumOfDays"]- (firstDayNum-1))</p>
 
@@ -37,18 +35,30 @@
             else
             {
                 if (temp <= (int)ViewData["ThisMonthNumOfDays"]){
-                    <div class="test2" > 
 
-                        <p> @temp</p>
-                        @{temp++;}
+                    //Add special border to today
+                    if (DateTime.Today.Day==temp){
+                            <div class="day rounded border border-5 border-warning">
 
-                    </div>
+                                <p> @temp</p>
+                                @{temp++;}
+
+                            </div>
+                        }
+                    else {
+                            <div class="day rounded border border-5">
+
+                            <p> @temp</p>
+                            @{temp++;}
+                                
+                        </div>
+                    }
                 }
                 else {
-                    <div class="test2"> 
+                        <div class="day rounded border border-5">
 
-                        <p> @tempNextMonth</p>
-                        @{tempNextMonth++;}
+                            <p> @tempNextMonth</p>
+                            @{tempNextMonth++;}
 
                     </div>
                 }
