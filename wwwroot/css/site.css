@@ -77,3 +77,28 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+.footer2 {
+    position: relative;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+    line-height: 60px;
+    background-color: white;
+    vertical-align: bottom;
+}
+
+.add-emp-box {
+    position: absolute;
+    top: 0;
+    height: inherit;
+    width: inherit;
+    background-color: red;
+    transition: 300ms;
+}
+
+.add-emp-box:focus {
+    top: -200px;
+    height:300px;
+    background-color: yellow;
+}

@@ -24,9 +24,9 @@
 
 
             if (firstDayNum != 0){
-                <div class="day rounded border border-5"> 
+                    <div class="day rounded border border-5" >
 
-                    <p>@((int)ViewData["PrevMonthNumOfDays"]- (firstDayNum-1))</p>
+                        <p>@((int)ViewData["PrevMonthNumOfDays"]- (firstDayNum-1))</p>
 
                     @{firstDayNum = firstDayNum - 1;}
 
@@ -38,7 +38,7 @@
 
                     //Add special border to today
                     if (DateTime.Today.Day==temp){
-                            <div class="day rounded border border-5 border-warning">
+                            <div class="day rounded border border-5 border-warning" >
 
                                 <p> @temp</p>
                                 @{temp++;}
@@ -46,7 +46,7 @@
                             </div>
                         }
                     else {
-                            <div class="day rounded border border-5">
+                            <div class="day rounded border border-5" >
 
                             <p> @temp</p>
                             @{temp++;}
@@ -55,7 +55,7 @@
                     }
                 }
                 else {
-                        <div class="day rounded border border-5">
+                        <div class="day rounded border border-5" >
 
                             <p> @tempNextMonth</p>
                             @{tempNextMonth++;}
@@ -68,4 +68,11 @@
         }
     </div>
     }
+
+    <div class="footer2">
+        outside relative
+        <div class="add-emp-box" tabindex="-1">
+            inside absolute
+        </div>
+    </div>
 </div>
