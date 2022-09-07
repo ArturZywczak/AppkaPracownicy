@@ -15,6 +15,14 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        //DATEPREP HERE
+        DateTime today = DateTime.Today;
+        
+        ViewData["Today"] = DateTime.Today.Day;
+        ViewData["FirstDay"] = ((int)new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).DayOfWeek + 6) % 7;
+        ViewData["PrevMonthNumOfDays"] = DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month-1);
+        ViewData["ThisMonthNumOfDays"] = DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month);
+        //zrobic ilepustych kwatratow
         return View();
     }
 
