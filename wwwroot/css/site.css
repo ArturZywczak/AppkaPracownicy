@@ -55,6 +55,10 @@ body {
     transition: 300ms;
 }
 
+.day-dragover {
+    background-color: pink;
+}
+
 .day:hover {
     border-color: red;
     background-color: red;
@@ -94,11 +98,38 @@ body {
     height: inherit;
     width: inherit;
     background-color: red;
-    transition: 300ms;
+    transition: 500ms;
+    height: 600px;
 }
 
-.add-emp-box:focus {
-    top: -200px;
-    height:300px;
+.emp-box-show {
+    top: -500px;
+
     background-color: yellow;
+}
+
+input[type=checkbox].testos {
+    display: none;
+}
+
+input[type=checkbox].testos + label {
+    background: #999;
+    height: 16px;
+    width: 16px;
+    display: inline-block;
+    padding: 0 0 0 0px;
+}
+
+input[type=checkbox].testos:checked + label {
+    background: #0080FF;
+    height: 16px;
+    width: 16px;
+    display: inline-block;
+    padding: 0 0 0 0px;
+}
+
+.test-draggable {
+    height: 65px;
+    width: 65px;
+    background-color: blue;
 }

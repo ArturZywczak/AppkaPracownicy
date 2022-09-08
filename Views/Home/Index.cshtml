@@ -20,24 +20,22 @@
     @for (int i = 0; i < 5; i++){
 
         <div class="day-row">
-        @for (int j = 0; j<7; j++){
+            @for (int j = 0; j<7; j++){
 
-
-            if (firstDayNum != 0){
+                if (firstDayNum != 0){
                     <div class="day rounded border border-5" >
 
                         <p>@((int)ViewData["PrevMonthNumOfDays"]- (firstDayNum-1))</p>
+                        @{firstDayNum = firstDayNum - 1;}
 
-                    @{firstDayNum = firstDayNum - 1;}
+                    </div>
+                }
+                else{
 
-                </div>
-            }
-            else
-            {
-                if (temp <= (int)ViewData["ThisMonthNumOfDays"]){
+                    if (temp <= (int)ViewData["ThisMonthNumOfDays"]){
 
-                    //Add special border to today
-                    if (DateTime.Today.Day==temp){
+                        //Add special border to today
+                        if (DateTime.Today.Day==temp){
                             <div class="day rounded border border-5 border-warning" >
 
                                 <p> @temp</p>
@@ -45,34 +43,33 @@
 
                             </div>
                         }
-                    else {
-                            <div class="day rounded border border-5" >
+                        else {
+                            <div class="day rounded border border-5" ondragenter="dragover(this)" ondragleave="dragover(this)" ondragover="allowDrop(event)" ondrop="drop(event)">
 
-                            <p> @temp</p>
-                            @{temp++;}
+                                <p> @temp</p>
+                                @{temp++;}
                                 
+                            </div>
+                        }
+                    }
+                    else {
+                        <div class="day rounded border border-5" >
+
+                                <p> @tempNextMonth</p>
+                                @{tempNextMonth++;}
+
                         </div>
                     }
                 }
-                else {
-                        <div class="day rounded border border-5" >
-
-                            <p> @tempNextMonth</p>
-                            @{tempNextMonth++;}
-
-                    </div>
-                }
-                
             }
-  
-        }
-    </div>
+        </div>
     }
 
     <div class="footer2">
         outside relative
-        <div class="add-emp-box" tabindex="-1">
-            inside absolute
+        <div class="add-emp-box" id="EmployeeBox">
+            <input type='checkbox' class="testos" name='thing' value='valuable' id="thing" onclick="showBox(this)" /><label for="thing"></label>
+            <div draggable="true" class="test-draggable" ondragstart="testhide(event)" ondragend="showBox(this)"></div>
         </div>
     </div>
 </div>
