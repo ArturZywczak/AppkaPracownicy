@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using AppkaPracownicy.Models;
+using System.Globalization;
+using System.Xml.Linq;
 
 namespace AppkaPracownicy.Controllers;
 
@@ -13,20 +15,36 @@ public class HomeController : Controller
         _logger = logger;
     }
 
-    public IActionResult Index()
-    {
+    public IActionResult Index(int id) {
+        int year, month;
+
+
+
+        if (id != 0) {
+            month = id / 10000;
+            year = id % 10000;
+        }
+        else {
+            month = DateTime.Today.Month;
+            year = DateTime.Today.Year;
+        }
+
         //DATEPREP HERE
-        DateTime today = DateTime.Today;
+        DateTime thisDate = new DateTime(year, month, 1);
+        ViewData["PrevDate"] = Int32.Parse(thisDate.AddMonths(-1).ToString("MMyyyy"));
+        ViewData["NextDate"] = Int32.Parse(thisDate.AddMonths(1).ToString("MMyyyy"));
+
+
+        ViewData["Today"] = DateTime.Today.Day + id;
+        ViewData["FirstDay"] = ((int)new DateTime(year, month, 1).DayOfWeek + 6) % 7;
+        ViewData["PrevMonthNumOfDays"] = DateTime.DaysInMonth(year, month==1? 12 : month - 1);
+        ViewData["ThisMonthNumOfDays"] = DateTime.DaysInMonth(year, month);
+        ViewData["ThisMonthAndYear"] = thisDate.ToString("MMMM", new CultureInfo("pl-PL")) + " " + year.ToString();
         
-        ViewData["Today"] = DateTime.Today.Day;
-        ViewData["FirstDay"] = ((int)new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).DayOfWeek + 6) % 7;
-        ViewData["PrevMonthNumOfDays"] = DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month-1);
-        ViewData["ThisMonthNumOfDays"] = DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month);
-        //zrobic ilepustych kwatratow
         return View();
     }
 
-    public IActionResult Privacy()
+    public IActionResult Settings()
     {
         return View();
     }

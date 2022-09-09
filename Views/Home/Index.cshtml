@@ -1,11 +1,20 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 
-    var firstDayNum = (int)ViewData["FirstDay"];
+    var firstDayNum = (int?)ViewData["FirstDay"];
     var temp = 1;
     var tempNextMonth = 1;
+
+    var nextDate = (int?)ViewData["NextDate"];
+    var prevDate = (int?)ViewData["PrevDate"];
+
 }
 <div class="test">
+    <div class="day-of-week-row align-items-center btn-group-vertical">
+        <button type="button" class="btn btn-light" onclick="location.href='@Url.Action("Index","Home", new { id = prevDate })'"><</button>
+        <h1> @ViewData["ThisMonthAndYear"] </h1>
+        <button type="button" class="btn btn-light" onclick="location.href='@Url.Action("Index","Home", new { id = nextDate })'">></button>
+    </div>
     <div class="day-of-week-row">
         <div class="day-of-week rounded"> Poniedziałek </div>
         <div class="day-of-week rounded"> Wtorek </div>
@@ -25,17 +34,17 @@
                 if (firstDayNum != 0){
                     <div class="day rounded border border-5" >
 
-                        <p>@((int)ViewData["PrevMonthNumOfDays"]- (firstDayNum-1))</p>
+                        <p>@((int?)ViewData["PrevMonthNumOfDays"]- (firstDayNum-1))</p>
                         @{firstDayNum = firstDayNum - 1;}
 
                     </div>
                 }
                 else{
 
-                    if (temp <= (int)ViewData["ThisMonthNumOfDays"]){
+                    if (temp <= (int?)ViewData["ThisMonthNumOfDays"]){
 
                         //Add special border to today
-                        if (DateTime.Today.Day==temp){
+                        if (DateTime.Today.Day==temp && nextDate == Int32.Parse(DateTime.Today.AddMonths(1).ToString("MMyyyy"))){
                             <div class="day rounded border border-5 border-warning" >
 
                                 <p> @temp</p>
