@@ -31,15 +31,13 @@ public class HomeController : Controller
 
         //DATEPREP HERE
         DateTime thisDate = new DateTime(year, month, 1);
-        ViewData["PrevDate"] = Int32.Parse(thisDate.AddMonths(-1).ToString("MMyyyy"));
-        ViewData["NextDate"] = Int32.Parse(thisDate.AddMonths(1).ToString("MMyyyy"));
+        ViewData["PrevMonthDate"] = Int32.Parse(thisDate.AddMonths(-1).ToString("MMyyyy"));
+        ViewData["NextMonthDate"] = Int32.Parse(thisDate.AddMonths(1).ToString("MMyyyy"));
 
-
-        ViewData["Today"] = DateTime.Today.Day + id;
         ViewData["FirstDay"] = ((int)new DateTime(year, month, 1).DayOfWeek + 6) % 7;
         ViewData["PrevMonthNumOfDays"] = DateTime.DaysInMonth(year, month==1? 12 : month - 1);
         ViewData["ThisMonthNumOfDays"] = DateTime.DaysInMonth(year, month);
-        ViewData["ThisMonthAndYear"] = thisDate.ToString("MMMM", new CultureInfo("pl-PL")) + " " + year.ToString();
+        ViewData["CurrentMonthAndYearAsString"] = thisDate.ToString("MMMM", new CultureInfo("pl-PL")) + " " + year.ToString();
         
         return View();
     }

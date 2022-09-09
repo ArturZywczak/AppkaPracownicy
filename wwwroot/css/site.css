@@ -4,12 +4,6 @@ html {
   overflow: hidden;
 }
 
-/*@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}*/
-
 html {
   position: relative;
   min-height: 100%;
@@ -75,7 +69,7 @@ body {
     height: calc(100% - 134px);
 }
 
-.test {
+.main-box {
     height: 100%;
     align-items: stretch;
     display: flex;
@@ -108,27 +102,29 @@ body {
     background-color: yellow;
 }
 
-input[type=checkbox].testos {
+input[type=checkbox].emp-box-button {
     display: none;
 }
 
-input[type=checkbox].testos + label {
+input[type=checkbox].emp-box-button + label {
     background: #999;
-    height: 16px;
-    width: 16px;
+    height: 32px;
+    width: 32px;
     display: inline-block;
     padding: 0 0 0 0px;
+    background-image: url('../2uparrows.png');
 }
 
-input[type=checkbox].testos:checked + label {
+input[type=checkbox].emp-box-button:checked + label {
     background: #0080FF;
-    height: 16px;
-    width: 16px;
+    height: 32px;
+    width: 32px;
     display: inline-block;
     padding: 0 0 0 0px;
+    background-image: url('../2downarrows.png');
 }
 
-.test-draggable {
+.employee-draggable {
     height: 65px;
     width: 65px;
     background-color: blue;

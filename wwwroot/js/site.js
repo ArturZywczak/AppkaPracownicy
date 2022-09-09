@@ -4,20 +4,22 @@
 // Write your JavaScript code.
 
 function showBox(checkbox) {
+
     parentDiv = checkbox.parentNode;
-    parentDiv.classList.toggle('emp-box-show');
+    var test = parentDiv.classList.toggle('emp-box-show');
+    if (test) checkbox.checked = true;
+    else checkbox.checked = false;
 }
 
 function dragover(thisdiv) {
     thisdiv.classList.toggle('day-dragover');
 }
 
-function testhide(ev) {
+function hideEmpBox(ev) {
     ev.dataTransfer.setData("text", "Gitara Siema");
 
 
-    var test = document.getElementById('thing');
-    test.checked = false;
+    var test = document.getElementById('empBoxButton');
     showBox(test);
 }
 
@@ -33,5 +35,3 @@ function drop(ev) {
 
     dragover(ev.target);
 }
-
-function 

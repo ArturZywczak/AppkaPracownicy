@@ -1,18 +1,19 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 
-    var firstDayNum = (int?)ViewData["FirstDay"];
-    var temp = 1;
-    var tempNextMonth = 1;
+    var firstDayNum = (int?)ViewData["FirstDay"]; //On which day of week (monday, friday etc) does this month start
+    
+    var dayNumber = 1;
+    var dayNextMonth = 1;
 
-    var nextDate = (int?)ViewData["NextDate"];
-    var prevDate = (int?)ViewData["PrevDate"];
+    var nextDate = (int?)ViewData["NextMonthDate"];
+    var prevDate = (int?)ViewData["PrevMonthDate"];
 
 }
-<div class="test">
+<div class="main-box">
     <div class="day-of-week-row align-items-center btn-group-vertical">
         <button type="button" class="btn btn-light" onclick="location.href='@Url.Action("Index","Home", new { id = prevDate })'"><</button>
-        <h1> @ViewData["ThisMonthAndYear"] </h1>
+        <h1> @ViewData["CurrentMonthAndYearAsString"] </h1>
         <button type="button" class="btn btn-light" onclick="location.href='@Url.Action("Index","Home", new { id = nextDate })'">></button>
     </div>
     <div class="day-of-week-row">
@@ -35,28 +36,34 @@
                     <div class="day rounded border border-5" >
 
                         <p>@((int?)ViewData["PrevMonthNumOfDays"]- (firstDayNum-1))</p>
-                        @{firstDayNum = firstDayNum - 1;}
+                        @{
+                            firstDayNum = firstDayNum - 1;
+                        }   
 
                     </div>
                 }
                 else{
 
-                    if (temp <= (int?)ViewData["ThisMonthNumOfDays"]){
+                    if (dayNumber <= (int?)ViewData["ThisMonthNumOfDays"]) {
 
                         //Add special border to today
-                        if (DateTime.Today.Day==temp && nextDate == Int32.Parse(DateTime.Today.AddMonths(1).ToString("MMyyyy"))){
+                        if (DateTime.Today.Day == dayNumber && nextDate == Int32.Parse(DateTime.Today.AddMonths(1).ToString("MMyyyy"))) {
                             <div class="day rounded border border-5 border-warning" >
 
-                                <p> @temp</p>
-                                @{temp++;}
+                                <p> @dayNumber</p>
+                                @{
+                                    dayNumber++;
+                                }
 
                             </div>
                         }
                         else {
                             <div class="day rounded border border-5" ondragenter="dragover(this)" ondragleave="dragover(this)" ondragover="allowDrop(event)" ondrop="drop(event)">
 
-                                <p> @temp</p>
-                                @{temp++;}
+                                <p> @dayNumber</p>
+                                @{
+                                    dayNumber++;
+                                }
                                 
                             </div>
                         }
@@ -64,8 +71,10 @@
                     else {
                         <div class="day rounded border border-5" >
 
-                                <p> @tempNextMonth</p>
-                                @{tempNextMonth++;}
+                            <p> @dayNextMonth</p>
+                            @{
+                                dayNextMonth++;
+                            }
 
                         </div>
                     }
@@ -77,8 +86,8 @@
     <div class="footer2">
         outside relative
         <div class="add-emp-box" id="EmployeeBox">
-            <input type='checkbox' class="testos" name='thing' value='valuable' id="thing" onclick="showBox(this)" /><label for="thing"></label>
-            <div draggable="true" class="test-draggable" ondragstart="testhide(event)" ondragend="showBox(this)"></div>
+            <input type='checkbox' class="emp-box-button" name='thing' value='valuable' id="empBoxButton" onclick="showBox(this)" /><label for="empBoxButton"></label>
+            <div draggable="true" class="employee-draggable" ondragstart="hideEmpBox(event)" ondragend="showBox(this)"></div>
         </div>
     </div>
 </div>
